@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Momen & Sara | حكايتنا 💖</title>
+    
+    <!-- PWA / Mobile Web App Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Momen & Sara">
+    <meta name="theme-color" content="#090d16">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💖</text></svg>">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome & Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            rose: '#f43f5e',
+                            gold: '#fbbf24',
+                            dark: '#090d16',
+                        }
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        romantic: ['"Dancing Script"', 'cursive'],
+                        serifTitle: ['"Playfair Display"', 'serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 2.5s infinite ease-in-out',
+                        'float': 'float 6s ease-in-out infinite',
+                        'shake': 'shake 0.5s linear',
+                        'spin-slow': 'spin 12s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        shake: {
+                            '0%, 100%': { transform: 'translateX(0)' },
+                            '20%, 60%': { transform: 'translateX(-8px)' },
+                            '40%, 80%': { transform: 'translateX(8px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
+            background-color: #090d16;
+            transition: background 0.8s ease;
+        }
+
+        /* Color Themes */
+        body.theme-rose { background: linear-gradient(135deg, #180914 0%, #2a081a 50%, #0d0914 100%); }
+        body.theme-midnight { background: linear-gradient(135deg, #090e17 0%, #111a2e 50%, #060911 100%); }
+        body.theme-emerald { background: linear-gradient(135deg, #061712 0%, #0e2920 50%, #040d0a 100%); }
+        body.theme-sunset { background: linear-gradient(135deg, #1f0b0b 0%, #361418 50%, #140609 100%); }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .glass-card-sm {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .text-glow-rose {
+            text-shadow: 0 0 15px rgba(244, 63, 94, 0.6), 0 0 30px rgba(244, 63, 94, 0.3);
+        }
+
+        .text-glow-gold {
+            text-shadow: 0 0 15px rgba(251, 191, 36, 0.6), 0 0 30px rgba(251, 191, 36, 0.3);
+        }
+
+        canvas#heartsCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.15); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.15); }
+            70% { transform: scale(1); }
+        }
+        .beating-heart {
+            animation: heartBeat 1.6s infinite ease-in-out;
+        }
+
+        .pin-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.2s ease;
+        }
+        .pin-btn:active {
+            background: rgba(244, 63, 94, 0.4);
+            transform: scale(0.92);
+        }
+
+        .pin-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid rgba(251, 191, 36, 0.6);
+            transition: all 0.3s ease;
+        }
+        .pin-dot.active {
+            background-color: #fbbf24;
+            box-shadow: 0 0 10px rgba(251, 191, 36, 0.8);
+            border-color: #fbbf24;
+        }
+
+        .dir-ltr {
+            direction: ltr;
+        }
+
+        /* Hidden YouTube Audio Container */
+        #ytAudioContainer {
+            position: fixed;
+            width: 1px;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            opacity: 0.01;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); }
+        ::-webkit-scrollbar-thumb { background: rgba(244, 63, 94, 0.4); border-radius: 4px; }
+    </style>
+</head>
+<body class="theme-rose text-white min-h-screen flex flex-col justify-between relative selection:bg-rose-500 selection:text-white">
+
+    <!-- Interactive Heart Floating Canvas -->
+    <canvas id="heartsCanvas"></canvas>
+
+    <!-- Hidden HTML5 Audio & YouTube Player Elements -->
+    <audio id="audioPlayer" preload="auto" loop></audio>
+    <div id="ytAudioContainer">
+        <div id="ytPlayer"></div>
+    </div>
+
+    <!-- Page Lock Screen (Visitor PIN Code) -->
+    <div id="appLockScreen" class="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-xl flex flex-col items-center justify-center p-4 transition-all duration-500 hidden">
+        <div id="appLockCard" class="glass-card w-full max-w-xs rounded-3xl p-6 text-center border border-rose-500/30 shadow-2xl flex flex-col items-center gap-4">
+            <div class="w-16 h-16 rounded-full bg-rose-500/20 border border-rose-400/40 flex items-center justify-center text-rose-400 text-2xl beating-heart">
+                <i class="fas fa-lock"></i>
+            </div>
+            <div>
+                <h2 class="text-xl font-bold text-amber-300 font-serifTitle">حكايتنا الخاصة 🔒</h2>
+                <p class="text-xs text-rose-200/80 mt-1">أدخل رمز الفتح لاستعراض العداد</p>
+            </div>
+
+            <!-- PIN Indicator Dots -->
+            <div class="flex items-center justify-center gap-3 my-1" id="appLockDots">
+                <div class="pin-dot"></div>
+                <div class="pin-dot"></div>
+                <div class="pin-dot"></div>
+                <div class="pin-dot"></div>
+            </div>
+
+            <p id="appLockError" class="text-xs text-rose-400 font-bold opacity-0 transition-opacity">الرمز غير صحيح!</p>
+
+            <!-- Keypad -->
+            <div class="grid grid-cols-3 gap-2.5 w-full max-w-[220px] dir-ltr">
+                <button type="button" onclick="handleAppLockInput('1')" class="pin-btn py-3 rounded-xl text-lg font-bold">1</button>
+                <button type="button" onclick="handleAppLockInput('2')" class="pin-btn py-3 rounded-xl text-lg font-bold">2</button>
+                <button type="button" onclick="handleAppLockInput('3')" class="pin-btn py-3 rounded-xl text-lg font-bold">3</button>
+                <button type="button" onclick="handleAppLockInput('4')" class="pin-btn py-3 rounded-xl text-lg font-bold">4</button>
+                <button type="button" onclick="handleAppLockInput('5')" class="pin-btn py-3 rounded-xl text-lg font-bold">5</button>
+                <button type="button" onclick="handleAppLockInput('6')" class="pin-btn py-3 rounded-xl text-lg font-bold">6</button>
+                <button type="button" onclick="handleAppLockInput('7')" class="pin-btn py-3 rounded-xl text-lg font-bold">7</button>
+                <button type="button" onclick="handleAppLockInput('8')" class="pin-btn py-3 rounded-xl text-lg font-bold">8</button>
+                <button type="button" onclick="handleAppLockInput('9')" class="pin-btn py-3 rounded-xl text-lg font-bold">9</button>
+                <button type="button" onclick="clearAppLockInput()" class="pin-btn py-3 rounded-xl text-xs text-rose-300 font-semibold">مسح</button>
+                <button type="button" onclick="handleAppLockInput('0')" class="pin-btn py-3 rounded-xl text-lg font-bold">0</button>
+                <button type="button" onclick="backspaceAppLockInput()" class="pin-btn py-3 rounded-xl text-sm text-amber-300"><i class="fas fa-backspace"></i></button>
+            </div>
+
+            <p class="text-[10px] text-gray-400">Momen &amp; Sara ❤️</p>
+        </div>
+    </div>
+
+    <!-- Admin Authentication Modal (Default PIN: 2026) -->
+    <div id="adminAuthModal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-xl flex flex-col items-center justify-center p-4 transition-all duration-300 hidden">
+        <div id="adminAuthCard" class="glass-card w-full max-w-xs rounded-3xl p-6 text-center border border-amber-500/30 shadow-2xl flex flex-col items-center gap-4">
+            <div class="w-14 h-14 rounded-full bg-amber-500/20 border border-amber-400/50 flex items-center justify-center text-amber-300 text-2xl">
+                <i class="fas fa-user-shield"></i>
+            </div>
+            <div>
+                <h3 class="text-base font-bold text-amber-300">منطقة الإدارة والتحكم</h3>
+                <p class="text-xs text-rose-200/80 mt-1">أدخل رمز الإدارة لفتح الإعدادات (الافتراضي: 2026)</p>
+            </div>
+            <input type="password" id="adminPinInput" maxlength="6" placeholder="2026" class="w-full bg-slate-900/90 border border-white/20 rounded-xl px-4 py-2.5 text-center text-xl tracking-widest font-mono text-amber-300 focus:outline-none focus:border-amber-400 dir-ltr">
+            <p id="adminAuthError" class="text-xs text-rose-400 font-bold hidden">الرمز غير صحيح!</p>
+            <div class="flex gap-2 w-full pt-1">
+                <button type="button" id="submitAdminPinBtn" class="flex-1 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-bold py-2.5 rounded-xl text-sm hover:opacity-90 active:scale-95 transition-all">دخول 🔓</button>
+                <button type="button" id="cancelAdminPinBtn" class="bg-white/10 text-rose-200 px-4 py-2.5 rounded-xl text-sm hover:bg-white/20 transition-all">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="relative z-20 w-full max-w-4xl mx-auto px-4 pt-6 flex items-center justify-between">
+        <!-- Audio Play/Pause Button -->
+        <button type="button" id="musicToggleBtn" class="glass-card-sm p-2.5 rounded-full hover:scale-105 active:scale-95 transition-all duration-300 text-rose-300 hover:text-white flex items-center gap-2.5 px-4 shadow-lg group border border-rose-500/25">
+            <i id="musicIcon" class="fas fa-music text-base text-amber-300 group-hover:animate-bounce"></i>
+            <div class="flex flex-col text-right">
+                <span id="musicTitleDisplay" class="text-xs font-bold text-rose-100 max-w-[165px] sm:max-w-[210px] truncate">خليني في حضنك - تامر عاشور</span>
+                <span id="musicStatusDisplay" class="text-[10px] text-rose-300/80">اضغط للتشغيل 🎵</span>
+            </div>
+        </button>
+
+        <!-- App Badge -->
+        <div class="hidden sm:flex items-center gap-2 glass-card-sm px-4 py-1.5 rounded-full border border-rose-500/20">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <span class="text-xs font-medium tracking-wide text-rose-200">عداد الحب المباشر</span>
+        </div>
+
+        <!-- Open Settings Button -->
+        <button type="button" id="openSettingsBtn" title="تعديل الصورة والأغنية والإعدادات" class="glass-card-sm p-2.5 px-3.5 h-10 rounded-full hover:scale-105 active:scale-95 transition-all duration-300 text-amber-300 hover:text-white flex items-center justify-center gap-2 shadow-lg">
+            <i class="fas fa-gear text-base"></i>
+            <span class="text-xs font-bold">الإعدادات</span>
+        </button>
+    </header>
+
+    <!-- Main Container -->
+    <main class="relative z-10 w-full max-w-3xl mx-auto px-4 py-6 flex-1 flex flex-col items-center justify-center gap-6">
+        
+        <!-- Couple Photo & Names Header -->
+        <div class="w-full glass-card rounded-3xl p-6 sm:p-8 text-center relative overflow-hidden group">
+            <div class="absolute -top-24 -left-24 w-48 h-48 bg-rose-600/20 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-amber-500/20 rounded-full blur-3xl"></div>
+
+            <!-- Photos Circle Frame (Click to quickly open Photo settings) -->
+            <div id="photoCircleTrigger" title="اضغط لتغيير الصورة" class="relative w-40 h-40 sm:w-48 sm:h-48 mx-auto mb-5 cursor-pointer group/photo">
+                <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-rose-500 via-amber-400 to-rose-600 animate-spin-slow p-1 shadow-2xl">
+                    <div class="w-full h-full bg-slate-950 rounded-full"></div>
+                </div>
+
+                <div class="absolute inset-1.5 rounded-full overflow-hidden border-2 border-white/25 bg-slate-900 flex items-center justify-center shadow-inner">
+                    <img id="mainCouplePhoto" src="GEM_PHOTO_77BEC533-626A-48BF-8942-A64BC7F2E43E_L0_001_recent_photo_701DE8C6-A9A3-4F09-A6F8-9EE74D08DB75.jpg" 
+                         onerror="this.onerror=null;this.src='https://placehold.co/400x400/180914/fbbf24?text=Momen+%26+Sara';"
+                         alt="Momen & Sara" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover/photo:scale-105">
+                </div>
+
+                <div class="absolute -bottom-2 right-2 bg-gradient-to-r from-rose-500 to-pink-600 text-white p-2.5 rounded-full shadow-lg border-2 border-slate-900 beating-heart">
+                    <i class="fas fa-heart text-base"></i>
+                </div>
+            </div>
+
+            <!-- Couple Names -->
+            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-2 text-glow-rose font-serifTitle flex items-center justify-center gap-3 flex-wrap">
+                <span class="text-rose-400" id="displayName1">Momen</span>
+                <span class="text-amber-300 font-romantic text-3xl sm:text-5xl">&amp;</span>
+                <span class="text-rose-400" id="displayName2">Sara</span>
+            </h1>
+
+            <!-- Start Date Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-white/5 border border-white/10 text-xs sm:text-sm text-rose-200/90 mt-1">
+                <i class="far fa-calendar-alt text-amber-400"></i>
+                <span>تاريخ البداية:</span>
+                <span id="displayDate" class="font-bold text-amber-300 dir-ltr">17 / 07 / 2026</span>
+            </div>
+        </div>
+
+        <!-- Couple Profiles & Palestine - Egypt Connection Section -->
+        <div class="w-full space-y-3">
+            <!-- Palestine & Egypt Love Bridge Banner -->
+            <div class="glass-card-sm rounded-2xl px-4 py-2.5 border border-rose-500/20 flex items-center justify-between gap-2 relative overflow-hidden">
+                <div class="flex items-center gap-2">
+                    <span class="text-xl sm:text-2xl drop-shadow">🇵🇸</span>
+                    <span id="displayCountry1" class="text-xs sm:text-sm font-bold text-emerald-300">فلسطين</span>
+                </div>
+
+                <div class="flex-1 flex items-center justify-center gap-2 px-2">
+                    <div class="h-px flex-1 bg-gradient-to-l from-rose-400/50 to-transparent"></div>
+                    <div class="flex items-center gap-1.5 bg-rose-500/15 border border-rose-400/30 px-3 py-1 rounded-full text-amber-300 text-xs shadow-inner">
+                        <i class="fas fa-plane text-rose-300 text-[11px] -scale-x-100"></i>
+                        <i class="fas fa-heart text-rose-500 beating-heart text-xs"></i>
+                    </div>
+                    <div class="h-px flex-1 bg-gradient-to-r from-amber-400/50 to-transparent"></div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <span id="displayCountry2" class="text-xs sm:text-sm font-bold text-amber-300">مصر</span>
+                    <span class="text-xl sm:text-2xl drop-shadow">🇪🇬</span>
+                </div>
+            </div>
+
+            <!-- Two Individual Profile Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <!-- Momen Card (Palestine) -->
+                <div class="glass-card rounded-2xl p-4 sm:p-5 border border-emerald-500/20 hover:border-emerald-400/40 transition-all duration-300 relative overflow-hidden group">
+                    <div class="absolute -top-10 -left-10 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all"></div>
+                    
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500/20 to-rose-500/20 border border-white/15 flex items-center justify-center text-rose-300 font-bold text-sm">
+                                <i class="fas fa-crown text-amber-300"></i>
+                            </div>
+                            <div class="text-right">
+                                <h3 id="cardName1" class="text-base sm:text-lg font-extrabold text-white font-serifTitle tracking-wide">Momen</h3>
+                            </div>
+                        </div>
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-[11px] font-bold text-emerald-200">
+                            <span>🇵🇸</span>
+                            <span id="cardCountry1">فلسطين</span>
+                        </span>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-white/10">
+                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-xs text-rose-100">
+                            <i class="fas fa-cake-candles text-amber-400"></i>
+                            <span id="displayDob1" class="font-mono font-bold text-amber-200 dir-ltr">29 / 09 / 2001</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sara Card (Egypt) -->
+                <div class="glass-card rounded-2xl p-4 sm:p-5 border border-amber-500/20 hover:border-amber-400/40 transition-all duration-300 relative overflow-hidden group">
+                    <div class="absolute -top-10 -left-10 w-24 h-24 bg-amber-500/10 rounded-full blur-2xl group-hover:bg-amber-500/20 transition-all"></div>
+                    
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-rose-500/20 to-amber-500/20 border border-white/15 flex items-center justify-center text-rose-300 font-bold text-sm">
+                                <i class="fas fa-gem text-rose-400"></i>
+                            </div>
+                            <div class="text-right">
+                                <h3 id="cardName2" class="text-base sm:text-lg font-extrabold text-white font-serifTitle tracking-wide">Sara</h3>
+                            </div>
+                        </div>
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/15 border border-amber-400/30 text-[11px] font-bold text-amber-200">
+                            <span>🇪🇬</span>
+                            <span id="cardCountry2">مصر</span>
+                        </span>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-white/10">
+                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-xs text-rose-100">
+                            <i class="fas fa-cake-candles text-amber-400"></i>
+                            <span id="displayDob2" class="font-mono font-bold text-amber-200 dir-ltr">03 / 11 / 1995</span>
+                        </div>
+
+                        <div id="kidsBadgeContainer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-rose-500/15 border border-rose-400/30 text-xs text-rose-200">
+                            <span class="text-sm leading-none">🦋</span>
+                            <span id="displayKids" class="font-serifTitle font-semibold tracking-wide text-rose-100 dir-ltr">Kayna • Kinda</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Countdown / Countup Timer Grid -->
+        <div class="w-full grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4">
+            <div class="glass-card p-4 rounded-2xl text-center flex flex-col justify-center items-center hover:scale-105 transition-transform duration-300">
+                <div class="text-3xl sm:text-4xl font-black text-amber-300 font-mono text-glow-gold" id="timerYears">00</div>
+                <div class="text-xs font-semibold text-rose-200 mt-1">سنوات</div>
+            </div>
+
+            <div class="glass-card p-4 rounded-2xl text-center flex flex-col justify-center items-center hover:scale-105 transition-transform duration-300">
+                <div class="text-3xl sm:text-4xl font-black text-rose-400 font-mono text-glow-rose" id="timerMonths">00</div>
+                <div class="text-xs font-semibold text-rose-200 mt-1">أشهر</div>
+            </div>
+
+            <div class="glass-card p-4 rounded-2xl text-center flex flex-col justify-center items-center hover:scale-105 transition-transform duration-300">
+                <div class="text-3xl sm:text-4xl font-black text-rose-400 font-mono text-glow-rose" id="timerDays">00</div>
+                <div class="text-xs font-semibold text-rose-200 mt-1">أيام</div>
+            </div>
+
+            <div class="glass-card p-4 rounded-2xl text-center flex flex-col justify-center items-center hover:scale-105 transition-transform duration-300">
+                <div class="text-3xl sm:text-4xl font-black text-amber-300 font-mono text-glow-gold" id="timerHours">00</div>
+                <div class="text-xs font-semibold text-rose-200 mt-1">ساعات</div>
+            </div>
+
+            <div class="glass-card col-span-2 sm:col-span-1 p-4 rounded-2xl text-center flex flex-row sm:flex-col justify-around sm:justify-center items-center hover:scale-105 transition-transform duration-300">
+                <div class="flex sm:flex-col items-center gap-3 sm:gap-0">
+                    <div>
+                        <div class="text-2xl sm:text-3xl font-bold text-rose-300 font-mono" id="timerMinutes">00</div>
+                        <div class="text-[10px] font-semibold text-rose-200/80">دقائق</div>
+                    </div>
+                    <div class="h-6 w-px bg-white/10 sm:hidden"></div>
+                    <div>
+                        <div class="text-2xl sm:text-3xl font-bold text-amber-400 font-mono animate-pulse" id="timerSeconds">00</div>
+                        <div class="text-[10px] font-semibold text-rose-200/80">ثواني</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Days Milestone Badge -->
+        <div class="w-full glass-card-sm rounded-2xl p-3.5 text-center border border-amber-500/20 flex items-center justify-center gap-2.5">
+            <i class="fas fa-sparkles text-amber-400 text-base"></i>
+            <span class="text-xs sm:text-sm font-medium text-rose-100">إجمالي الأيام معاً:</span>
+            <span id="displayTotalDays" class="text-lg font-extrabold text-amber-300 font-mono bg-amber-400/10 px-3 py-0.5 rounded-lg border border-amber-400/30">0</span>
+            <span class="text-xs text-rose-200">يوماً من الحب 💖</span>
+        </div>
+
+        <!-- Custom Love Message & Action Buttons -->
+        <div class="w-full glass-card rounded-3xl p-6 text-center relative">
+            <p id="displayQuote" class="text-base sm:text-lg font-medium leading-relaxed text-rose-100 px-2 font-cairo">
+                "كل ثانية معك هي بداية لأجمل حكاية... دمت لي شيئاً جميلاً لا ينتهي."
+            </p>
+
+            <div class="mt-5 flex flex-wrap items-center justify-center gap-3">
+                <button type="button" id="sendPulseBtn" class="bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 text-white font-bold py-2.5 px-5 rounded-full shadow-lg shadow-rose-600/30 active:scale-95 transition-all flex items-center gap-2 text-xs sm:text-sm">
+                    <i class="fas fa-heart-pulse text-base animate-bounce"></i>
+                    <span>أرسل نبضة حب الآن 💓</span>
+                </button>
+
+                <button type="button" id="randomQuoteBtn" class="glass-card-sm hover:bg-white/10 text-amber-300 py-2.5 px-4 rounded-full text-xs font-semibold transition-all flex items-center gap-1.5">
+                    <i class="fas fa-wand-magic-sparkles"></i>
+                    <span>عبارة جديدة</span>
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 w-full max-w-3xl mx-auto px-4 py-4 text-center text-xs text-rose-300/60 flex flex-col items-center gap-1">
+        <p>مصنوع بحب من أجل <span class="text-rose-300 font-bold">Momen &amp; Sara</span> 💍</p>
+    </footer>
+
+    <!-- Main Settings Modal -->
+    <div id="settingsModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-card w-full max-w-lg rounded-3xl p-5 sm:p-7 space-y-5 max-h-[90vh] overflow-y-auto border border-rose-500/30 shadow-2xl">
+            
+            <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                <h3 class="text-lg font-bold text-amber-300 flex items-center gap-2">
+                    <i class="fas fa-sliders"></i>
+                    <span>إعدادات العداد والتحكم</span>
+                </h3>
+                <button type="button" id="closeSettingsBtn" class="text-gray-400 hover:text-white p-1.5 rounded-full hover:bg-white/10">
+                    <i class="fas fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Tab Buttons -->
+            <div class="flex border-b border-white/10 gap-1.5 pb-2 overflow-x-auto text-xs font-semibold text-rose-200">
+                <button type="button" onclick="switchSettingsTab(1)" id="tabBtn1" class="px-3 py-1.5 rounded-lg bg-rose-500/30 text-amber-300 border border-rose-500/50 whitespace-nowrap">👤 الأسماء والتاريخ</button>
+                <button type="button" onclick="switchSettingsTab(2)" id="tabBtn2" class="px-3 py-1.5 rounded-lg hover:bg-white/5 whitespace-nowrap">📷 الصورة والمظهر</button>
+                <button type="button" onclick="switchSettingsTab(3)" id="tabBtn3" class="px-3 py-1.5 rounded-lg hover:bg-white/5 whitespace-nowrap">🎵 الأغنية الخاصة</button>
+                <button type="button" onclick="switchSettingsTab(4)" id="tabBtn4" class="px-3 py-1.5 rounded-lg hover:bg-white/5 whitespace-nowrap">🔒 الأرقام السرية</button>
+            </div>
+
+            <!-- Tab 1: Names, Date & Quote -->
+            <div id="tabContent1" class="space-y-3 text-right">
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs text-rose-200 mb-1">الاسم الأول</label>
+                        <input type="text" id="inputName1" class="w-full bg-slate-900/90 border border-white/15 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-rose-200 mb-1">الاسم الثاني</label>
+                        <input type="text" id="inputName2" class="w-full bg-slate-900/90 border border-white/15 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs text-rose-200 mb-1">🇵🇸 بلد الأول</label>
+                        <input type="text" id="inputCountry1" class="w-full bg-slate-900/90 border border-white/15 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-rose-200 mb-1">🇪🇬 بلد الثاني</label>
+                        <input type="text" id="inputCountry2" class="w-full bg-slate-900/90 border border-white/15 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs text-rose-200 mb-1">🎂 تاريخ الأول</label>
+                        <input type="text" id="inputDob1" placeholder="29 / 09 / 2001" class="w-full bg-slate-900/90 border border-white/15 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500 dir-ltr">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-rose-200 mb-1">🎂 تاريخ الثاني</label>
+                        <input type="text" id="inputDob2" placeholder="03 / 11 / 1995" class="w-full bg-slate-900/90 border border-white/15 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500 dir-ltr">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs text-rose-200 mb-1">🦋 الأسماء الخاصة (سارة)</label>
+                    <input type="text" id="inputKids" placeholder="Kayna • Kinda" class="w-full bg-slate-900/90 border border-white/15 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500 dir-ltr">
+                </div>
+
+                <div>
+                    <label class="block text-xs text-rose-200 mb-1">تاريخ المناسبة / بداية العداد</label>
+                    <input type="datetime-local" id="inputStartDate" class="w-full bg-slate-900/90 border border-white/15 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500 dir-ltr">
+                </div>
+
+                <div>
+                    <label class="block text-xs text-rose-200 mb-1">الرسالة الخاصة</label>
+                    <textarea id="inputQuote" rows="2" class="w-full bg-slate-900/90 border border-white/15 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500 resize-none"></textarea>
+                </div>
+            </div>
+
+            <!-- Tab 2: Photo & Theme -->
+            <div id="tabContent2" class="space-y-4 text-right hidden">
+                <div class="bg-white/5 border border-rose-500/20 rounded-2xl p-4 space-y-3 text-center">
+                    <label class="block text-xs text-rose-200 mb-1 text-right">صورة الصفحة (اختر صورة من جهازك أو ضع رابطاً):</label>
+                    
+                    <div class="w-24 h-24 mx-auto rounded-full overflow-hidden border-2 border-amber-400 shadow-md bg-slate-900">
+                        <img id="settingsPhotoPreview" src="GEM_PHOTO_77BEC533-626A-48BF-8942-A64BC7F2E43E_L0_001_recent_photo_701DE8C6-A9A3-4F09-A6F8-9EE74D08DB75.jpg" onerror="this.onerror=null;this.src='https://placehold.co/400x400/180914/fbbf24?text=Momen+%26+Sara';" class="w-full h-full object-cover object-center">
+                    </div>
+
+                    <input type="file" id="photoFileInput" accept="image/*" class="hidden">
+                    <div class="flex gap-2 justify-center pt-1">
+                        <button type="button" onclick="document.getElementById('photoFileInput').click()" class="bg-rose-500/30 hover:bg-rose-500/40 border border-rose-500/50 text-rose-200 px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all">
+                            <i class="fas fa-camera"></i>
+                            <span>اختيار صورة من الجهاز</span>
+                        </button>
+                        <button type="button" id="removePhotoBtn" class="bg-white/10 hover:bg-white/20 text-rose-300 px-3 py-2 rounded-xl text-xs transition-all">
+                            استعادة صورتكما الأساسية
+                        </button>
+                    </div>
+
+                    <div class="pt-2 text-right">
+                        <label class="block text-[11px] text-rose-200/80 mb-1">أو رابط مباشر للصورة (URL للمشاركة):</label>
+                        <input type="url" id="inputPhotoUrl" placeholder="https://example.com/photo.jpg" class="w-full bg-slate-900/90 border border-white/15 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500 dir-ltr">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs text-rose-200 mb-2">اختر الثيم (الألوان)</label>
+                    <div class="grid grid-cols-4 gap-2">
+                        <button type="button" onclick="selectTheme('rose')" class="p-2.5 rounded-xl border border-rose-500/50 bg-rose-950/60 text-xs font-semibold flex flex-col items-center gap-1 hover:scale-105 transition-all">
+                            <span class="w-3.5 h-3.5 rounded-full bg-rose-500"></span>
+                            <span>وردي</span>
+                        </button>
+                        <button type="button" onclick="selectTheme('midnight')" class="p-2.5 rounded-xl border border-blue-500/50 bg-slate-950/60 text-xs font-semibold flex flex-col items-center gap-1 hover:scale-105 transition-all">
+                            <span class="w-3.5 h-3.5 rounded-full bg-blue-500"></span>
+                            <span>ليلي</span>
+                        </button>
+                        <button type="button" onclick="selectTheme('emerald')" class="p-2.5 rounded-xl border border-emerald-500/50 bg-emerald-950/60 text-xs font-semibold flex flex-col items-center gap-1 hover:scale-105 transition-all">
+                            <span class="w-3.5 h-3.5 rounded-full bg-emerald-500"></span>
+                            <span>زمردي</span>
+                        </button>
+                        <button type="button" onclick="selectTheme('sunset')" class="p-2.5 rounded-xl border border-amber-500/50 bg-red-950/60 text-xs font-semibold flex flex-col items-center gap-1 hover:scale-105 transition-all">
+                            <span class="w-3.5 h-3.5 rounded-full bg-amber-500"></span>
+                            <span>غروب</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 3: Audio Settings -->
+            <div id="tabContent3" class="space-y-4 text-right hidden">
+                <div class="bg-white/5 border border-rose-500/20 rounded-2xl p-4 space-y-3">
+                    <h4 class="text-xs font-bold text-amber-300 flex items-center gap-1.5">
+                        <i class="fas fa-music"></i>
+                        <span>إعدادات الأغنية (الافتراضية: تامر عاشور - خليني في حضنك)</span>
+                    </h4>
+                    
+                    <input type="file" id="audioFileInput" accept="audio/*" class="hidden">
+                    <button type="button" onclick="document.getElementById('audioFileInput').click()" class="w-full bg-rose-500/20 hover:bg-rose-500/30 border border-rose-500/40 rounded-xl p-3 text-xs text-rose-200 font-semibold flex items-center justify-center gap-2 transition-all">
+                        <i class="fas fa-file-audio text-amber-400 text-base"></i>
+                        <span id="audioFileNameDisplay">رفع ملف أغنية بديل (MP3 / WAV)</span>
+                    </button>
+
+                    <div class="pt-1">
+                        <label class="block text-xs text-rose-200 mb-1">أو وضع رابط مباشر لأغنية (URL):</label>
+                        <input type="url" id="inputAudioUrl" placeholder="https://domain.com/song.mp3" class="w-full bg-slate-900/90 border border-white/15 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500 dir-ltr">
+                    </div>
+
+                    <div class="pt-2 flex items-center justify-between border-t border-white/10 text-xs">
+                        <span class="text-rose-200/70">المصدر الحالي:</span>
+                        <span id="audioStatusBadge" class="font-bold text-amber-300">خليني في حضنك - تامر عاشور</span>
+                    </div>
+
+                    <button type="button" id="resetAudioBtn" class="text-xs text-rose-400 hover:text-rose-300 flex items-center gap-1">
+                        <i class="fas fa-rotate-left"></i>
+                        <span>العودة لأغنية تامر عاشور - خليني في حضنك</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab 4: PIN Codes (Admin & App Lock) -->
+            <div id="tabContent4" class="space-y-4 text-right hidden">
+                <!-- Admin PIN -->
+                <div class="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-3.5 space-y-2">
+                    <h4 class="text-xs font-bold text-amber-300 flex items-center gap-1.5">
+                        <i class="fas fa-key"></i>
+                        <span>رمز الإدارة الخاص بك (Admin PIN)</span>
+                    </h4>
+                    <p class="text-[11px] text-rose-200/80">هذا الرمز الذي يُطلب عند فتح الإعدادات (الافتراضي: 2026)</p>
+                    <input type="text" id="inputAdminPinCode" maxlength="6" class="w-full bg-slate-900/90 border border-white/15 rounded-xl px-3 py-2 text-center text-base tracking-widest font-mono text-amber-300 focus:outline-none focus:border-amber-400 dir-ltr">
+                </div>
+
+                <!-- Visitor App Lock -->
+                <div class="bg-white/5 border border-rose-500/20 rounded-2xl p-3.5 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="text-xs font-bold text-rose-300">قفل فتح الصفحة (للزوار)</h4>
+                            <p class="text-[11px] text-rose-200/70">طلب رمز مكون من 4 أرقام قبل استعراض العداد</p>
+                        </div>
+                        <input type="checkbox" id="toggleAppLock" class="w-5 h-5 accent-rose-500 cursor-pointer">
+                    </div>
+                    <div id="appLockInputGroup" class="hidden pt-2 border-t border-white/10">
+                        <label class="block text-xs text-rose-200 mb-1">رمز فتح الصفحة (4 أرقام):</label>
+                        <input type="password" id="inputAppLockPin" maxlength="4" placeholder="مثال: 1234" class="w-full bg-slate-900/90 border border-white/15 rounded-xl px-3 py-2 text-center text-base tracking-widest font-mono text-amber-300 focus:outline-none focus:border-amber-400 dir-ltr">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Buttons -->
+            <div class="flex flex-col gap-2 pt-3 border-t border-white/10">
+                <div class="flex items-center gap-2">
+                    <button type="button" id="saveSettingsBtn" class="flex-1 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-bold py-2.5 rounded-xl transition-all shadow-lg text-xs sm:text-sm">
+                        حفظ وتطبيق التغييرات 💾
+                    </button>
+                    <button type="button" id="resetDefaultsBtn" class="bg-white/10 hover:bg-white/20 text-rose-200 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all">
+                        ضبط افتراضي
+                    </button>
+                </div>
+                <button type="button" id="copyShareLinkBtn" class="w-full bg-rose-500/20 hover:bg-rose-500/30 border border-rose-500/40 text-rose-200 font-semibold py-2 rounded-xl transition-all text-xs flex items-center justify-center gap-2">
+                    <i class="fas fa-share-nodes text-amber-400"></i>
+                    <span>نسخ رابط المشاركة لإرساله لسارة 🔗</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 glass-card px-5 py-2.5 rounded-full text-xs font-bold text-amber-300 border border-amber-400/40 shadow-2xl opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-2">
+        <i class="fas fa-heart text-rose-500"></i>
+        <span id="toastText">تم التحديث بنجاح!</span>
+    </div>
+
+    <!-- Main Logic Script -->
+    <script>
+        // الصورة الدائمة الأساسية للثنائي
+        const PERMANENT_PHOTO = "GEM_PHOTO_77BEC533-626A-48BF-8942-A64BC7F2E43E_L0_001_recent_photo_701DE8C6-A9A3-4F09-A6F8-9EE74D08DB75.jpg";
+        // معرف فيديو YouTube الرسمي لأغنية تامر عاشور - خليني في حضنك
+        const DEFAULT_YT_VIDEO_ID = "SKfi0V8NRhQ";
+
+        const DEFAULT_CONFIG = {
+            name1: "Momen",
+            name2: "Sara",
+            country1: "فلسطين",
+            country2: "مصر",
+            dob1: "29 / 09 / 2001",
+            dob2: "03 / 11 / 1995",
+            kids: "Kayna • Kinda",
+            startDate: "2026-07-17T00:00",
+            quote: "كل ثانية معك هي بداية لأجمل حكاية... دمت لي شيئاً جميلاً لا ينتهي.",
+            theme: "rose",
+            photo: PERMANENT_PHOTO,
+            adminPin: "2026",
+            appLockEnabled: false,
+            appLockPin: "",
+            songType: "youtube", // "youtube", "file", "url", "builtin"
+            songUrl: "",
+            ytVideoId: DEFAULT_YT_VIDEO_ID,
+            songTitle: "خليني في حضنك - تامر عاشور"
+        };
+
+        let config = { ...DEFAULT_CONFIG };
+        let isAdminUnlocked = false;
+        let enteredAppLockPin = "";
+        let audioBlobUrl = null;
+
+        // YouTube Player State
+        let ytPlayer = null;
+        let isYtReady = false;
+        let pendingYtPlay = false;
+
+        // Load YouTube IFrame Player API asynchronously
+        (function loadYouTubeAPI() {
+            const tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            const firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        })();
+
+        window.onYouTubeIframeAPIReady = function() {
+            try {
+                ytPlayer = new YT.Player('ytPlayer', {
+                    height: '120',
+                    width: '120',
+                    videoId: config.ytVideoId || DEFAULT_YT_VIDEO_ID,
+                    playerVars: {
+                        autoplay: 0,
+                        controls: 0,
+                        loop: 1,
+                        playlist: config.ytVideoId || DEFAULT_YT_VIDEO_ID,
+                        playsinline: 1
+                    },
+                    events: {
+                        onReady: function(event) {
+                            isYtReady = true;
+                            event.target.setVolume(100);
+                            if (pendingYtPlay && config.songType === 'youtube') {
+                                pendingYtPlay = false;
+                                event.target.playVideo();
+                            }
+                        },
+                        onStateChange: function(event) {
+                            if (event.data === YT.PlayerState.ENDED) {
+                                event.target.playVideo();
+                            }
+                        },
+                        onError: function() {
+                            if (isPlayingMusic && config.songType === 'youtube') {
+                                startSynthMelody();
+                            }
+                        }
+                    }
+                });
+            } catch (e) {
+                console.error("YouTube API init error:", e);
+            }
+        };
+
+        const romanticQuotes = [
+            "كل ثانية معك هي بداية لأجمل حكاية... دمت لي شيئاً جميلاً لا ينتهي.",
+            "أنت لست فقط حبيبي، أنت كل أوقاتي السعيدة وموطن قلبي.",
+            "في عيونك أرى مستقبلي، وفي قربك أجد كل السعادة.",
+            "حبك هو الهدية الأجمل التي أهدتني إياها الحياة.",
+            "كل يوم يمر معك يثبت لي أنك أفضل اختيارات عمري."
+        ];
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastText = document.getElementById('toastText');
+            if (toast && toastText) {
+                toastText.textContent = msg;
+                toast.classList.remove('opacity-0');
+                setTimeout(() => toast.classList.add('opacity-0'), 3000);
+            }
+        }
+
+        function runCounterEngine() {
+            try {
+                const start = new Date(config.startDate).getTime();
+                const now = new Date().getTime();
+                const diff = now - start;
+                const absDiff = Math.abs(diff);
+
+                const secondsTotal = Math.floor(absDiff / 1000);
+                const minutesTotal = Math.floor(secondsTotal / 60);
+                const hoursTotal = Math.floor(minutesTotal / 60);
+                const daysTotal = Math.floor(hoursTotal / 24);
+
+                const years = Math.floor(daysTotal / 365.25);
+                const remainingDays = Math.floor(daysTotal % 365.25);
+                const months = Math.floor(remainingDays / 30.44);
+                const days = Math.floor(remainingDays % 30.44);
+
+                const hours = hoursTotal % 24;
+                const minutes = minutesTotal % 60;
+                const seconds = secondsTotal % 60;
+
+                document.getElementById('timerYears').textContent = String(years).padStart(2, '0');
+                document.getElementById('timerMonths').textContent = String(months).padStart(2, '0');
+                document.getElementById('timerDays').textContent = String(days).padStart(2, '0');
+                document.getElementById('timerHours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('timerMinutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('timerSeconds').textContent = String(seconds).padStart(2, '0');
+
+                document.getElementById('displayTotalDays').textContent = daysTotal.toLocaleString('ar-EG');
+            } catch (e) {
+                console.error("Counter error:", e);
+            }
+        }
+
+        function processImageFile(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        let maxDim = 600;
+                        let w = img.width;
+                        let h = img.height;
+
+                        if (w > h) {
+                            if (w > maxDim) {
+                                h = Math.round((h * maxDim) / w);
+                                w = maxDim;
+                            }
+                        } else {
+                            if (h > maxDim) {
+                                w = Math.round((w * maxDim) / h);
+                                h = maxDim;
+                            }
+                        }
+
+                        canvas.width = w;
+                        canvas.height = h;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, w, h);
+                        resolve(canvas.toDataURL('image/jpeg', 0.85));
+                    };
+                    img.onerror = reject;
+                    img.src = e.target.result;
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        const DB_NAME = 'MomenSaraAudioDB';
+        function initAudioDB() {
+            return new Promise((resolve) => {
+                const req = indexedDB.open(DB_NAME, 1);
+                req.onupgradeneeded = (e) => {
+                    const db = e.target.result;
+                    if (!db.objectStoreNames.contains('files')) {
+                        db.createObjectStore('files');
+                    }
+                };
+                req.onsuccess = (e) => resolve(e.target.result);
+                req.onerror = () => resolve(null);
+            });
+        }
+
+        async function saveAudioFileToDB(file) {
+            try {
+                const db = await initAudioDB();
+                if (!db) return;
+                const tx = db.transaction('files', 'readwrite');
+                tx.objectStore('files').put(file, 'userSong');
+            } catch (e) {}
+        }
+
+        async function loadAudioFileFromDB() {
+            try {
+                const db = await initAudioDB();
+                if (!db) return null;
+                return new Promise((resolve) => {
+                    const tx = db.transaction('files', 'readonly');
+                    const req = tx.objectStore('files').get('userSong');
+                    req.onsuccess = () => resolve(req.result || null);
+                    req.onerror = () => resolve(null);
+                });
+            } catch (e) {
+                return null;
+            }
+        }
+
+        async function clearAudioFileFromDB() {
+            try {
+                const db = await initAudioDB();
+                if (!db) return;
+                const tx = db.transaction('files', 'readwrite');
+                tx.objectStore('files').delete('userSong');
+            } catch (e) {}
+        }
+
+        async function loadConfig() {
+            try {
+                const saved = localStorage.getItem('momen_sara_love_config_v2');
+                if (saved) {
+                    config = { ...DEFAULT_CONFIG, ...JSON.parse(saved) };
+                }
+
+                const params = new URLSearchParams(window.location.search);
+                if (params.has('n1')) config.name1 = params.get('n1');
+                if (params.has('n2')) config.name2 = params.get('n2');
+                if (params.has('c1')) config.country1 = params.get('c1');
+                if (params.has('c2')) config.country2 = params.get('c2');
+                if (params.has('b1')) config.dob1 = params.get('b1');
+                if (params.has('b2')) config.dob2 = params.get('b2');
+                if (params.has('k')) config.kids = params.get('k');
+                if (params.has('d')) config.startDate = params.get('d');
+                if (params.has('q')) config.quote = params.get('q');
+                if (params.has('t')) config.theme = params.get('t');
+                if (params.has('p')) config.photo = params.get('p');
+                if (params.has('s')) {
+                    config.songType = 'url';
+                    config.songUrl = params.get('s');
+                }
+
+                const blob = await loadAudioFileFromDB();
+                if (blob && config.songType === 'file') {
+                    audioBlobUrl = URL.createObjectURL(blob);
+                }
+            } catch (e) {
+                console.error("Config load error:", e);
+            }
+
+            applyConfigToDOM();
+            setupAudioSource();
+        }
+
+        function saveConfig() {
+            try {
+                localStorage.setItem('momen_sara_love_config_v2', JSON.stringify(config));
+            } catch (e) {
+                console.error("Config save error:", e);
+            }
+        }
+
+        function applyConfigToDOM() {
+            document.getElementById('displayName1').textContent = config.name1;
+            document.getElementById('displayName2').textContent = config.name2;
+            document.getElementById('cardName1').textContent = config.name1;
+            document.getElementById('cardName2').textContent = config.name2;
+            document.getElementById('inputName1').value = config.name1;
+            document.getElementById('inputName2').value = config.name2;
+
+            document.getElementById('displayCountry1').textContent = config.country1 || "فلسطين";
+            document.getElementById('displayCountry2').textContent = config.country2 || "مصر";
+            document.getElementById('cardCountry1').textContent = config.country1 || "فلسطين";
+            document.getElementById('cardCountry2').textContent = config.country2 || "مصر";
+            document.getElementById('inputCountry1').value = config.country1 || "فلسطين";
+            document.getElementById('inputCountry2').value = config.country2 || "مصر";
+
+            document.getElementById('displayDob1').textContent = config.dob1 || "29 / 09 / 2001";
+            document.getElementById('displayDob2').textContent = config.dob2 || "03 / 11 / 1995";
+            document.getElementById('inputDob1').value = config.dob1 || "29 / 09 / 2001";
+            document.getElementById('inputDob2').value = config.dob2 || "03 / 11 / 1995";
+
+            const kidsVal = config.kids !== undefined ? config.kids : "Kayna • Kinda";
+            document.getElementById('displayKids').textContent = kidsVal;
+            document.getElementById('inputKids').value = kidsVal;
+            document.getElementById('kidsBadgeContainer').classList.toggle('hidden', !kidsVal.trim());
+
+            const dObj = new Date(config.startDate);
+            const formatted = `${String(dObj.getDate()).padStart(2, '0')} / ${String(dObj.getMonth() + 1).padStart(2, '0')} / ${dObj.getFullYear()}`;
+            document.getElementById('displayDate').textContent = formatted;
+
+            try {
+                document.getElementById('inputStartDate').value = dObj.toISOString().slice(0, 16);
+            } catch (e) {}
+
+            document.getElementById('displayQuote').textContent = config.quote;
+            document.getElementById('inputQuote').value = config.quote;
+
+            const photoUrl = config.photo || PERMANENT_PHOTO;
+            document.getElementById('mainCouplePhoto').src = photoUrl;
+            document.getElementById('settingsPhotoPreview').src = photoUrl;
+            document.getElementById('inputPhotoUrl').value = (photoUrl.startsWith('data:') || photoUrl === PERMANENT_PHOTO) ? '' : photoUrl;
+
+            document.getElementById('inputAdminPinCode').value = config.adminPin || "2026";
+
+            const toggleLock = document.getElementById('toggleAppLock');
+            toggleLock.checked = config.appLockEnabled;
+            document.getElementById('appLockInputGroup').classList.toggle('hidden', !config.appLockEnabled);
+            document.getElementById('inputAppLockPin').value = config.appLockPin || "";
+
+            toggleLock.onchange = function() {
+                document.getElementById('appLockInputGroup').classList.toggle('hidden', !this.checked);
+            };
+
+            document.getElementById('inputAudioUrl').value = config.songUrl || "";
+
+            if (config.appLockEnabled && config.appLockPin && config.appLockPin.length === 4) {
+                document.getElementById('appLockScreen').classList.remove('hidden');
+                updateAppLockDots();
+            } else {
+                document.getElementById('appLockScreen').classList.add('hidden');
+            }
+
+            selectTheme(config.theme, false);
+        }
+
+        function selectTheme(themeName, save = true) {
+            document.body.className = `theme-${themeName} text-white min-h-screen flex flex-col justify-between relative selection:bg-rose-500 selection:text-white`;
+            config.theme = themeName;
+            if (save) saveConfig();
+        }
+
+        function updateAppLockDots() {
+            const dots = document.querySelectorAll('#appLockDots .pin-dot');
+            dots.forEach((dot, idx) => {
+                if (idx < enteredAppLockPin.length) dot.classList.add('active');
+                else dot.classList.remove('active');
+            });
+        }
+
+        function handleAppLockInput(num) {
+            if (enteredAppLockPin.length < 4) {
+                enteredAppLockPin += num;
+                updateAppLockDots();
+                playPianoSynthNote(350 + enteredAppLockPin.length * 80);
+
+                if (enteredAppLockPin.length === 4) {
+                    setTimeout(() => {
+                        if (enteredAppLockPin === config.appLockPin) {
+                            document.getElementById('appLockScreen').classList.add('hidden');
+                            showToast("أهلاً بكما! تم فتح الصفحة 💖");
+                            enteredAppLockPin = "";
+                        } else {
+                            const card = document.getElementById('appLockCard');
+                            const err = document.getElementById('appLockError');
+                            card.classList.add('animate-shake');
+                            err.classList.remove('opacity-0');
+                            setTimeout(() => card.classList.remove('animate-shake'), 500);
+                            setTimeout(() => {
+                                enteredAppLockPin = "";
+                                updateAppLockDots();
+                                err.classList.add('opacity-0');
+                            }, 800);
+                        }
+                    }, 150);
+                }
+            }
+        }
+
+        function clearAppLockInput() {
+            enteredAppLockPin = "";
+            updateAppLockDots();
+        }
+
+        function backspaceAppLockInput() {
+            if (enteredAppLockPin.length > 0) {
+                enteredAppLockPin = enteredAppLockPin.slice(0, -1);
+                updateAppLockDots();
+            }
+        }
+
+        const openSettingsBtn = document.getElementById('openSettingsBtn');
+        const photoCircleTrigger = document.getElementById('photoCircleTrigger');
+        const adminAuthModal = document.getElementById('adminAuthModal');
+        const settingsModal = document.getElementById('settingsModal');
+
+        function openAdminOrSettings(defaultTab = 1) {
+            if (isAdminUnlocked) {
+                switchSettingsTab(defaultTab);
+                settingsModal.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                document.getElementById('adminPinInput').value = '';
+                document.getElementById('adminAuthError').classList.add('hidden');
+                adminAuthModal.dataset.targetTab = defaultTab;
+                adminAuthModal.classList.remove('hidden');
+                setTimeout(() => document.getElementById('adminPinInput').focus(), 100);
+            }
+        }
+
+        openSettingsBtn.addEventListener('click', () => openAdminOrSettings(1));
+        photoCircleTrigger.addEventListener('click', () => openAdminOrSettings(2));
+
+        document.getElementById('cancelAdminPinBtn').addEventListener('click', () => {
+            adminAuthModal.classList.add('hidden');
+        });
+
+        document.getElementById('submitAdminPinBtn').addEventListener('click', verifyAdminAccess);
+        document.getElementById('adminPinInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') verifyAdminAccess();
+        });
+
+        function verifyAdminAccess() {
+            const entered = document.getElementById('adminPinInput').value.trim();
+            const correctPin = config.adminPin || "2026";
+            if (entered === correctPin) {
+                isAdminUnlocked = true;
+                const targetTab = parseInt(adminAuthModal.dataset.targetTab || "1", 10);
+                adminAuthModal.classList.add('hidden');
+                switchSettingsTab(targetTab);
+                settingsModal.classList.remove('opacity-0', 'pointer-events-none');
+                showToast("تم دخول وضع الإدارة بنجاح 👑");
+            } else {
+                document.getElementById('adminAuthError').classList.remove('hidden');
+                const card = document.getElementById('adminAuthCard');
+                card.classList.add('animate-shake');
+                setTimeout(() => card.classList.remove('animate-shake'), 500);
+            }
+        }
+
+        document.getElementById('closeSettingsBtn').addEventListener('click', () => {
+            settingsModal.classList.add('opacity-0', 'pointer-events-none');
+        });
+
+        function switchSettingsTab(idx) {
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`tabContent${i}`).classList.add('hidden');
+                document.getElementById(`tabBtn${i}`).className = "px-3 py-1.5 rounded-lg hover:bg-white/5 whitespace-nowrap";
+            }
+            document.getElementById(`tabContent${idx}`).classList.remove('hidden');
+            document.getElementById(`tabBtn${idx}`).className = "px-3 py-1.5 rounded-lg bg-rose-500/30 text-amber-300 border border-rose-500/50 whitespace-nowrap";
+        }
+
+        document.getElementById('photoFileInput').addEventListener('change', async function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                try {
+                    showToast("جاري معالجة الصورة... ⏳");
+                    const compressedBase64 = await processImageFile(file);
+                    config.photo = compressedBase64;
+                    document.getElementById('settingsPhotoPreview').src = compressedBase64;
+                    document.getElementById('mainCouplePhoto').src = compressedBase64;
+                    document.getElementById('inputPhotoUrl').value = '';
+                    saveConfig();
+                    showToast("تم تحديث وحفظ الصورة! 🖼️");
+                } catch (err) {
+                    showToast("حدث خطأ في تحميل الصورة، اختر صورة أخرى");
+                }
+            }
+        });
+
+        document.getElementById('removePhotoBtn').addEventListener('click', () => {
+            config.photo = PERMANENT_PHOTO;
+            document.getElementById('settingsPhotoPreview').src = PERMANENT_PHOTO;
+            document.getElementById('mainCouplePhoto').src = PERMANENT_PHOTO;
+            document.getElementById('inputPhotoUrl').value = '';
+            saveConfig();
+            showToast("تمت استعادة صورتكما الأساسية 💖");
+        });
+
+        const audioPlayer = document.getElementById('audioPlayer');
+        let isPlayingMusic = false;
+        let audioCtx = null;
+        let synthTimer = null;
+
+        function updateAudioLabels() {
+            const badge = document.getElementById('audioStatusBadge');
+            const titleDisplay = document.getElementById('musicTitleDisplay');
+
+            if (config.songType === 'youtube') {
+                badge.textContent = "خليني في حضنك - تامر عاشور";
+                titleDisplay.textContent = config.songTitle || "خليني في حضنك - تامر عاشور";
+            } else if (config.songType === 'file') {
+                badge.textContent = "ملف أغنية مرفوع";
+                titleDisplay.textContent = config.songTitle || "أغنيتنا الخاصة";
+            } else if (config.songType === 'url') {
+                badge.textContent = "رابط أغنية خارجي";
+                titleDisplay.textContent = config.songTitle || "أغنيتنا الخاصة";
+            } else {
+                badge.textContent = "نغمة بيانو دافئة";
+                titleDisplay.textContent = "نغمة دافئة";
+            }
+        }
+
+        function setupAudioSource() {
+            if (config.songType === 'file' && audioBlobUrl) {
+                audioPlayer.src = audioBlobUrl;
+            } else if (config.songType === 'url' && config.songUrl) {
+                audioPlayer.src = config.songUrl;
+            } else {
+                audioPlayer.src = "";
+            }
+            updateAudioLabels();
+        }
+
+        document.getElementById('audioFileInput').addEventListener('change', async function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                if (isPlayingMusic) stopAllAudio();
+                await saveAudioFileToDB(file);
+                audioBlobUrl = URL.createObjectURL(file);
+                config.songType = 'file';
+                config.songTitle = file.name.replace(/\.[^/.]+$/, "");
+                document.getElementById('audioFileNameDisplay').textContent = file.name;
+                setupAudioSource();
+                saveConfig();
+                showToast("تم حفظ الأغنية بنجاح! 🎵");
+            }
+        });
+
+        document.getElementById('resetAudioBtn').addEventListener('click', async () => {
+            if (isPlayingMusic) stopAllAudio();
+            await clearAudioFileFromDB();
+            audioBlobUrl = null;
+            config.songType = 'youtube';
+            config.ytVideoId = DEFAULT_YT_VIDEO_ID;
+            config.songUrl = "";
+            config.songTitle = "خليني في حضنك - تامر عاشور";
+            document.getElementById('audioFileNameDisplay').textContent = "رفع ملف أغنية بديل (MP3 / WAV)";
+            document.getElementById('inputAudioUrl').value = "";
+            setupAudioSource();
+            saveConfig();
+            showToast("تمت استعادة أغنية تامر عاشور - خليني في حضنك 🎶");
+        });
+
+        function playPianoSynthNote(freq) {
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.2);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 1.2);
+            } catch (e) {}
+        }
+
+        const chordNotes = [261.63, 329.63, 392.00, 523.25, 440.00, 349.23];
+        let noteIdx = 0;
+
+        function stopAllAudio() {
+            const icon = document.getElementById('musicIcon');
+            const status = document.getElementById('musicStatusDisplay');
+            pendingYtPlay = false;
+
+            try {
+                if (ytPlayer && isYtReady && typeof ytPlayer.pauseVideo === 'function') {
+                    ytPlayer.pauseVideo();
+                }
+            } catch (e) {}
+
+            try {
+                if (audioPlayer && !audioPlayer.paused) {
+                    audioPlayer.pause();
+                }
+            } catch (e) {}
+
+            if (synthTimer) {
+                clearInterval(synthTimer);
+                synthTimer = null;
+            }
+
+            isPlayingMusic = false;
+            icon.className = "fas fa-music text-base text-amber-300";
+            status.textContent = "اضغط للتشغيل 🎵";
+        }
+
+        function toggleMusicPlayer() {
+            const icon = document.getElementById('musicIcon');
+            const status = document.getElementById('musicStatusDisplay');
+
+            if (isPlayingMusic) {
+                stopAllAudio();
+                showToast("تم إيقاف الأغنية");
+            } else {
+                isPlayingMusic = true;
+                icon.className = "fas fa-compact-disc text-base text-amber-300 animate-spin";
+                status.textContent = "يعزف الآن... 🎶";
+
+                if (config.songType === 'youtube') {
+                    if (ytPlayer && isYtReady && typeof ytPlayer.playVideo === 'function') {
+                        ytPlayer.playVideo();
+                        showToast(`تشغيل: ${config.songTitle} 🎶❤️`);
+                    } else {
+                        pendingYtPlay = true;
+                        showToast("جاري تحميل أغنية تامر عاشور... ⏳🎶");
+                    }
+                } else if ((config.songType === 'file' || config.songType === 'url') && audioPlayer.src) {
+                    audioPlayer.play().then(() => {
+                        showToast(`تشغيل: ${config.songTitle || "أغنيتنا"} 🎵`);
+                    }).catch(() => {
+                        startSynthMelody();
+                    });
+                } else {
+                    startSynthMelody();
+                }
+            }
+        }
+
+        function startSynthMelody() {
+            showToast("تشغيل النغمة الدافئة 💕");
+            synthTimer = setInterval(() => {
+                playPianoSynthNote(chordNotes[noteIdx]);
+                noteIdx = (noteIdx + 1) % chordNotes.length;
+            }, 1300);
+        }
+
+        document.getElementById('musicToggleBtn').addEventListener('click', toggleMusicPlayer);
+
+        document.getElementById('copyShareLinkBtn').addEventListener('click', () => {
+            const base = window.location.origin + window.location.pathname;
+            const p = new URLSearchParams();
+            p.set('n1', config.name1);
+            p.set('n2', config.name2);
+            p.set('c1', config.country1);
+            p.set('c2', config.country2);
+            p.set('b1', config.dob1);
+            p.set('b2', config.dob2);
+            p.set('k', config.kids);
+            p.set('d', config.startDate);
+            p.set('q', config.quote);
+            p.set('t', config.theme);
+            if (config.photo && !config.photo.startsWith('data:') && config.photo !== PERMANENT_PHOTO) {
+                p.set('p', config.photo);
+            }
+            if (config.songType === 'url' && config.songUrl) {
+                p.set('s', config.songUrl);
+            }
+
+            const shareUrl = `${base}?${p.toString()}`;
+            const temp = document.createElement('input');
+            temp.value = shareUrl;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            showToast("تم نسخ رابط المشاركة بنجاح! 🔗💖");
+        });
+
+        document.getElementById('saveSettingsBtn').addEventListener('click', () => {
+            config.name1 = document.getElementById('inputName1').value.trim() || "Momen";
+            config.name2 = document.getElementById('inputName2').value.trim() || "Sara";
+            config.country1 = document.getElementById('inputCountry1').value.trim() || "فلسطين";
+            config.country2 = document.getElementById('inputCountry2').value.trim() || "مصر";
+            config.dob1 = document.getElementById('inputDob1').value.trim() || "29 / 09 / 2001";
+            config.dob2 = document.getElementById('inputDob2').value.trim() || "03 / 11 / 1995";
+            config.kids = document.getElementById('inputKids').value.trim();
+
+            const dt = document.getElementById('inputStartDate').value;
+            if (dt) config.startDate = new Date(dt).toISOString();
+
+            config.quote = document.getElementById('inputQuote').value.trim() || DEFAULT_CONFIG.quote;
+
+            const photoUrlVal = document.getElementById('inputPhotoUrl').value.trim();
+            if (photoUrlVal) {
+                config.photo = photoUrlVal;
+            }
+
+            const newAdminPin = document.getElementById('inputAdminPinCode').value.trim();
+            if (newAdminPin.length >= 4) config.adminPin = newAdminPin;
+
+            const lockCheck = document.getElementById('toggleAppLock').checked;
+            const appPin = document.getElementById('inputAppLockPin').value.trim();
+
+            if (lockCheck) {
+                if (appPin.length !== 4 || isNaN(appPin)) {
+                    showToast("رمز الفتح يجب أن يتكون من 4 أرقام!");
+                    switchSettingsTab(4);
+                    return;
+                }
+                config.appLockEnabled = true;
+                config.appLockPin = appPin;
+            } else {
+                config.appLockEnabled = false;
+            }
+
+            const songUrlVal = document.getElementById('inputAudioUrl').value.trim();
+            if (songUrlVal) {
+                if (isPlayingMusic) stopAllAudio();
+                config.songType = 'url';
+                config.songUrl = songUrlVal;
+                config.songTitle = "أغنيتنا الخاصة";
+                setupAudioSource();
+            }
+
+            saveConfig();
+            applyConfigToDOM();
+            runCounterEngine();
+
+            settingsModal.classList.add('opacity-0', 'pointer-events-none');
+            showToast("تم حفظ التغييرات بنجاح 💖");
+            triggerHeartExplosion();
+        });
+
+        document.getElementById('resetDefaultsBtn').addEventListener('click', async () => {
+            if (isPlayingMusic) stopAllAudio();
+            await clearAudioFileFromDB();
+            audioBlobUrl = null;
+            config = { ...DEFAULT_CONFIG };
+            saveConfig();
+            applyConfigToDOM();
+            setupAudioSource();
+            runCounterEngine();
+            settingsModal.classList.add('opacity-0', 'pointer-events-none');
+            showToast("تمت إعادة الضبط الافتراضي");
+        });
+
+        let quoteIdx = 0;
+        document.getElementById('randomQuoteBtn').addEventListener('click', () => {
+            quoteIdx = (quoteIdx + 1) % romanticQuotes.length;
+            const q = romanticQuotes[quoteIdx];
+            document.getElementById('displayQuote').textContent = q;
+            if (isAdminUnlocked) {
+                config.quote = q;
+                saveConfig();
+            }
+            showToast("عبارة جديدة 🌸");
+        });
+
+        document.getElementById('sendPulseBtn').addEventListener('click', (e) => {
+            triggerHeartExplosion(e.clientX, e.clientY);
+            showToast("أرسلت نبضة حب! 💓");
+        });
+
+        const canvas = document.getElementById('heartsCanvas');
+        const ctx = canvas.getContext('2d');
+        let hearts = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Heart {
+            constructor(x, y) {
+                this.x = x || Math.random() * canvas.width;
+                this.y = y || canvas.height + 20;
+                this.size = Math.random() * 14 + 10;
+                this.speedY = Math.random() * 2 + 1;
+                this.speedX = (Math.random() - 0.5) * 1.5;
+                this.opacity = Math.random() * 0.7 + 0.3;
+                this.color = `hsl(${Math.random() * 30 + 340}, 90%, 65%)`;
+            }
+
+            update() {
+                this.y -= this.speedY;
+                this.x += this.speedX;
+                this.opacity -= 0.004;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = Math.max(0, this.opacity);
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                const topCurveHeight = this.size * 0.3;
+                ctx.moveTo(this.x, this.y + topCurveHeight);
+                ctx.bezierCurveTo(this.x, this.y, this.x - this.size / 2, this.y, this.x - this.size / 2, this.y + topCurveHeight);
+                ctx.bezierCurveTo(this.x - this.size / 2, this.y + (this.size + topCurveHeight) / 2, this.x, this.y + this.size, this.x, this.y + this.size);
+                ctx.bezierCurveTo(this.x, this.y + (this.size + topCurveHeight) / 2, this.x + this.size / 2, this.y + (this.size + topCurveHeight) / 2, this.x + this.size / 2, this.y + topCurveHeight);
+                ctx.bezierCurveTo(this.x + this.size / 2, this.y, this.x, this.y, this.x, this.y + topCurveHeight);
+                ctx.closePath();
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function triggerHeartExplosion(x, y) {
+            const startX = x || canvas.width / 2;
+            const startY = y || canvas.height / 2;
+            for (let i = 0; i < 25; i++) {
+                const h = new Heart(startX, startY);
+                h.speedY = (Math.random() - 0.5) * 5;
+                h.speedX = (Math.random() - 0.5) * 5;
+                hearts.push(h);
+            }
+        }
+
+        window.addEventListener('click', (e) => {
+            if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'INPUT') {
+                hearts.push(new Heart(e.clientX, e.clientY));
+            }
+        });
+
+        function animateHearts() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (Math.random() < 0.1) {
+                hearts.push(new Heart());
+            }
+
+            for (let i = 0; i < hearts.length; i++) {
+                hearts[i].update();
+                hearts[i].draw();
+                if (hearts[i].opacity <= 0 || hearts[i].y < -20) {
+                    hearts.splice(i, 1);
+                    i--;
+                }
+            }
+            requestAnimationFrame(animateHearts);
+        }
+
+        window.onload = async function() {
+            await loadConfig();
+            runCounterEngine();
+            setInterval(runCounterEngine, 1000);
+            animateHearts();
+        };
+    </script>
+</body>
+</html>
